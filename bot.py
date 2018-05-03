@@ -38,4 +38,5 @@ def stop(m):
 	user.delete_user(cid, uid)
 	send(m, "Hasta la vista joven astronauta")
 
+
 bot.polling()
