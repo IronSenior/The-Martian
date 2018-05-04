@@ -25,18 +25,47 @@ def sendMarkdownMessage(cid, message_text):
 def start(m):
 	cid = m.chat.id
 	uid = m.from_user.id
+	uname = m.from_user.first_name
 	#Guardará información del usuario para enviarle datos posteriormente
-	user.save_user(cid, uid)
-	send(m, "Hola, bienvenido a Marte")
-	send(m, "A partir de ahora empezarás a recibir información sobre Marte, si quieres dejar de recibirla usa el comando /stop")
+	if not user.existe_user(cid):
+		user.save_user(cid, uid, uname)
+		send(m, "Hola, bienvenido a Marte")
+		send(m, "A partir de ahora empezarás a recibir información sobre Marte, si quieres dejar de recibirla usa el comando /stop")
+	else:
+		send(m, "Ya estás inscrito")
 
 @bot.message_handler(commands=['stop'])
 def stop(m):
 	cid = m.chat.id
 	uid = m.from_user.id
 	#Borra por completo los datos del usuario
+	if user.existe_user(cid):
+		user.delete_user(cid, uid)
+		send(m, "Hasta la vista joven astronauta")
+	else:
+		send(m, "No te has inscrito todavia")
+
+#Funcion que entra en el modo secreto
+@bot.message_handler(commands=['secret'])
+def secret(m):
+	cid = m.chat.id
+	uid = m.from_user.id
+	uname = m.from_user.first_name
+
+	#Pequeña secuencia de conexion
+	send(m, "Entrando en el modo de desarrollo")
+	send(m, "Esperando conexión")
+	for i in range(3):
+		time.sleep(1)
+		send(m, "...")
+	send(m, "Conexión establecida con servidor central")
+
+	#Genera una id aleatoria para el usuario y la guarda (es pate del juegpo)
+	n = random.randint(1,700)
+	user.save_id(cid, n)
+	send(m, "ID: %i" %(n))
 	user.delete_user(cid, uid)
-	send(m, "Hasta la vista joven astronauta")
+	#infl.save_infl(cid, uid)
 
 
 bot.polling()
