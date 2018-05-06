@@ -52,7 +52,24 @@ def secret(m):
 	uid = m.from_user.id
 	uname = m.from_user.first_name
 
-	#Pequeña secuencia de conexion
+	#Otro posible comienzo para el reto que me libra de historia
+	send(m, "Felicidades, has pasado la primera prueba")
+	time.sleep(2)
+	send(m, "Ahora ya sé que eres digno de aceptar mi reto")
+	time.sleep(2)
+	send(m, "Resuelve mis acertijos hasta llegar al final de la prueba")
+	time.sleep(2)
+	send(m, "Lo puedes intentar solo o acompañado")
+	time.sleep(2)
+	send(m, "Pero recuerda")
+	time.sleep(2)
+	send(m, "Solo los mejores llegarán al final")
+
+	user.delete_user(cid, uid)
+	#infl.save_infl(cid, uid)
+
+'''
+	#Pequeña secuencia de conexion (Posiblemente se cambie)
 	send(m, "Entrando en el modo de desarrollo")
 	send(m, "Esperando conexión")
 	for i in range(3):
@@ -60,12 +77,13 @@ def secret(m):
 		send(m, "...")
 	send(m, "Conexión establecida con servidor central")
 
-	#Genera una id aleatoria para el usuario y la guarda (es pate del juegpo)
+	#Genera una id aleatoria para el usuario y la guarda 
 	n = random.randint(1,700)
 	user.save_id(cid, n)
 	send(m, "ID: %i" %(n))
 	user.delete_user(cid, uid)
 	#infl.save_infl(cid, uid)
 
+'''
 
 bot.polling()
