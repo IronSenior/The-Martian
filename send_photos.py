@@ -6,7 +6,9 @@ import private as tk
 from libs import user_funcs
 from libs import info_funcs as info
 import random
+import requests 
 import time
+import json
 
 #CONFIGURACIÓN DE TELEGRAM
 token = tk.tk()
@@ -23,10 +25,14 @@ def sendMarkdownMessage(cid, message_text):
 
 def send_info():
 	users = user_funcs.get_users()
-	photo = info.get_photo()
+	nasa_api = requests.get("https://api.nasa.gov/planetary/apod?api_key=mxDbxnbvRcDo3mrclKtKlUypkjdK65P80GJLmBQZ")
+	nasa_info = json.loads(nasa_api.content)
+	photo = nasa_info["url"]
+	print (photo)
+
 
 	for user in users:
-		bot.send_message(user, "Una foto de Marte nueva cada día")
+		bot.send_message(user, "Una foto del espacio nueva cada día")
 		bot.send_photo(user, photo)
 	time.sleep(10)#(86400)
 	send_info()
