@@ -28,7 +28,7 @@ def send_info():
 	for user in users:
 		bot.send_message(user, "Una foto de Marte nueva cada día")
 		bot.send_photo(user, photo)
-	time.sleep(86400)
+	time.sleep(10)#(86400)
 	send_info()
 
 send_info()
