@@ -26,7 +26,7 @@ def send_info():
 	photo = info.get_photo()
 
 	for user in users:
-		bot.send_message(user, "Una foto de Marte nueva cada día")
+		bot.send_message(user, "Una foto del espacio nueva cada día")
 		bot.send_photo(user, photo)
 	time.sleep(86400)
 	send_info()
