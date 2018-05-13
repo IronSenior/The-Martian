@@ -26,11 +26,12 @@ def start(m):
 	cid = m.chat.id
 	uid = m.from_user.id
 	uname = m.from_user.first_name
-	#Guardará información del usuario para enviarle datos posteriormente
-	if not user.existe_user(cid):
+
+	#It saves user data to send the photos later on
+	if not user.is_user(cid):
 		user.save_user(cid, uid, uname)
-		send(m, "Hola, bienvenido a Marte")
-		send(m, "A partir de ahora empezarás a recibir información sobre Marte, si quieres dejar de recibirla usa el comando /stop")
+		send(m, "Hola, bienvenido al Marciano")
+		send(m, "A partir de ahora empezarás a recibir fotos todos los días, si quieres dejar de recibirlas usa el comando /stop")
 	else:
 		send(m, "Ya estás inscrito")
 
@@ -38,21 +39,14 @@ def start(m):
 def stop(m):
 	cid = m.chat.id
 	uid = m.from_user.id
-	#Borra por completo los datos del usuario
-	if user.existe_user(cid):
+
+	#It deletes an user who doesn't want to recieve photos anymore
+	if user.is_user(cid):
 		user.delete_user(cid, uid)
 		send(m, "Hasta la vista joven astronauta")
+		send(m, "Si alguna vez quieres volver solo tienes que usar /start")
 	else:
-		send(m, "No te has inscrito todavia")
-
-
-
-#Funcion que entra en el modo secreto
-@bot.message_handler(commands=['secret'])
-def secret(m):
-	cid = m.chat.id
-	uid = m.from_user.id
-	uname = m.from_user.first_name
+		send(m, "No te has inscrito todavía")
 
 
 

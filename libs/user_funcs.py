@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 import json
 import os
-import shutil
 
-db_path = "/home/pepe/Escritorio/Mis proyectos/Software/El_Marciano/DB/"
+
+#DB CONFIGURATION
+db_path = "/home/pepe/Escritorio/Mis proyectos/Software/Marciano/DB/" 
 
 def save_user(cid, uid, uname):
-	#Guarda a un usuario en la base de datos
+	#It saves the user id in order to send the photos later on
 	with open('%susers.json'%(db_path), 'r') as jsonfile:
 		users = json.load(jsonfile)
 		users["users"].append(cid)
@@ -15,7 +16,8 @@ def save_user(cid, uid, uname):
 	with open('%susers.json'%(db_path), 'w') as outfile:
 		json.dump(users, outfile, indent=3)
 
-	#Crea una carpeta para guardar información sobre el usuario
+'''
+	#It creates a new directory in order to save more user data in the furture
 	path = db_path + str(cid)
 	os.mkdir(path)
 
@@ -26,9 +28,10 @@ def save_user(cid, uid, uname):
 			"uname": uname
 			}
 		json.dump(data, outfile, indent=3)
+'''
 
 def delete_user(cid, uid):
-	#Borra a un usario de la base de datos para que no se le envie más información
+	#It deletes an user from the DB
 	with open('%susers.json'%(db_path), 'r') as jsonfile:
 		users = json.load(jsonfile)
 
@@ -40,14 +43,14 @@ def delete_user(cid, uid):
 		json.dump(users, jsonfile, indent=3)
 
 def get_users():
-	#Devuelve una lista con todos los usuarios inscritos
+	#It returns all users' id
 	with open('%susers.json'%(db_path), 'r') as jsonfile:
 		users = json.load(jsonfile)
 
 		return users["users"]
 
-def existe_user(cid):
-	#Devuelve True si el usuario está inscritos
+def is_user(cid):
+	#It returns True if an user is subscribed
 	with open('%susers.json'%(db_path), 'r') as jsonfile:
 		users = json.load(jsonfile)
 
@@ -58,6 +61,7 @@ def existe_user(cid):
 
 		return False
 
+'''
 def save_id(cid, user_id):
 	path = db_path + str(cid)
 	with open('%s/basic_info.json'%(path), 'r') as jsonfile:
@@ -67,5 +71,5 @@ def save_id(cid, user_id):
 
 	with open('%s/basic_info.json'%(path), 'w') as outfile:
 		json.dump(info, outfile, indent=3)
-
+'''
 

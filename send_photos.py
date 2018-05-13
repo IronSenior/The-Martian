@@ -1,41 +1,36 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import telebot
-#from libs.keyboard import *
 import private as tk
 from libs import user_funcs
-from libs import info_funcs as info
-import random
 import requests 
 import time
 import json
 
-#CONFIGURACIÓN DE TELEGRAM
+#TELEGRAM CONFIGURATION
 token = tk.tk()
 bot = telebot.TeleBot(token)
 
-
-#Simplifica el enviar
-def send(m, message_text):
-    bot.send_message(m.chat.id, message_text)
-
-def sendMarkdownMessage(cid, message_text):
-    bot.send_message(cid, message_text, parse_mode="Markdown")
-
+#API CONFIGURATION
+key = tk.key()
+url = "https://api.nasa.gov/planetary/apod?api_key=%s"%(key)
 
 def send_info():
 	users = user_funcs.get_users()
-	nasa_api = requests.get("https://api.nasa.gov/planetary/apod?api_key=mxDbxnbvRcDo3mrclKtKlUypkjdK65P80GJLmBQZ")
+
+	#It uses the oficial api of "Astronomy Picture of the day"
+	nasa_api = requests.get(url)
 	nasa_info = json.loads(nasa_api.content)
 	photo = nasa_info["url"]
 	title = nasa_info["title"]
-	print (photo)
+	explanation = nasa_info["explanation"]
 
-
+	#It sends all users the photo of the day
 	for user in users:
-		bot.send_message(user, "Una foto del espacio nueva cada día")
+		#bot.send_message(user, "Una foto del espacio nueva cada día")
 		bot.send_photo(user, photo)
 		bot.send_message(user, title)
+		bot.send_message(user, explanation)
 	time.sleep(86400)
 	send_info()
 
