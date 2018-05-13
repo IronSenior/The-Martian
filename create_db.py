@@ -3,7 +3,6 @@
 import os
 import json
 
-db_path = ""
 
 def create_bot():
 	os.mkdir("DB")

@@ -1,26 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import telebot
-#from libs.keyboard import *
-import private as tk
+from libs import private as tk
 from libs import user_funcs as user
+from libs import send_photos as photo
 import random
 import time
 
-#CONFIGURACIÓN DE TELEGRAM
+#TELEGRAM CONFIGURATION
 token = tk.tk()
 bot = telebot.TeleBot(token)
 
 
-#Simplifica el enviar
+#Send_message simplified
 def send(m, message_text):
     bot.send_message(m.chat.id, message_text)
 
-def sendMarkdownMessage(cid, message_text):
-    bot.send_message(cid, message_text, parse_mode="Markdown")
 
-
-#Funciones de inicio y cierre del bot
+#Start and stop commands
 @bot.message_handler(commands=['start'])
 def start(m):
 	cid = m.chat.id
@@ -31,7 +28,8 @@ def start(m):
 	if not user.is_user(cid):
 		user.save_user(cid, uid, uname)
 		send(m, "Hello, welcome to the Martian")
-		send(m, "The Marcian will send you pictures every day, if you don't want to recieve photos anymore use /stop")
+		send(m, "The Martian will send you pictures every day, if you don't want to recieve photos anymore use /stop")
+		photo.send_first_picture(cid)
 	else:
 		send(m, "You are already subscribed")
 
@@ -46,7 +44,7 @@ def stop(m):
 		send(m, "See you later young astronaut")
 		send(m, "If you want to recieve pictures again, use /start")
 	else:
-		send(m, "You have not subscribed yet")
+		send(m, "You are not subscribed")
 
 
 
