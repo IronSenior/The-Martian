@@ -5,7 +5,7 @@ import os
 
 
 #DB CONFIGURATION
-db_path = "/home/pepe/Escritorio/Mis proyectos/Software/Marciano/DB/" 
+db_path = "" 
 
 def save_user(cid, uid, uname):
 	#It saves the user id in order to send the photos later on
