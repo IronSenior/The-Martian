@@ -30,10 +30,10 @@ def start(m):
 	#It saves user data to send the photos later on
 	if not user.is_user(cid):
 		user.save_user(cid, uid, uname)
-		send(m, "Hola, bienvenido al Marciano")
-		send(m, "A partir de ahora empezarás a recibir fotos todos los días, si quieres dejar de recibirlas usa el comando /stop")
+		send(m, "Hello, welcome to the Martian")
+		send(m, "The Marcian will send you pictures every day, if you don't want to recieve photos anymore use /stop")
 	else:
-		send(m, "Ya estás inscrito")
+		send(m, "You are already subscribed")
 
 @bot.message_handler(commands=['stop'])
 def stop(m):
@@ -43,10 +43,10 @@ def stop(m):
 	#It deletes an user who doesn't want to recieve photos anymore
 	if user.is_user(cid):
 		user.delete_user(cid, uid)
-		send(m, "Hasta la vista joven astronauta")
-		send(m, "Si alguna vez quieres volver solo tienes que usar /start")
+		send(m, "See you later young astronaut")
+		send(m, "If you want to recieve pictures again, use /start")
 	else:
-		send(m, "No te has inscrito todavía")
+		send(m, "You have not subscribed yet")
 
 
 
