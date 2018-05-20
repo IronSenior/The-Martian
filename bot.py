@@ -5,6 +5,7 @@ from libs import private as tk
 from libs import user_funcs as user
 from libs import send_photos as photo
 import random
+import thread
 import time
 
 #TELEGRAM CONFIGURATION
