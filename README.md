@@ -13,7 +13,7 @@ The Martian is a Telegram Bot that send you "The Astronomy Picture of the day" a
 ## Versions
 
 * 1.0
-	* Sends you a photo every day with some information about it.
+	* It sends you a photo every day with some information about it.
 
 ## Authors
 
