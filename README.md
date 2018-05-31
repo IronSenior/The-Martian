@@ -4,7 +4,7 @@ The Martian is a Telegram Bot that send you "The Astronomy Picture of the day" a
 
 ## Contributions
 
--Fork it (https://github.com/IronSenior/Jorge-TelegramBot-f1/fork)  
+-Fork it (https://github.com/IronSenior/The-Martian/fork)  
 -Create a new branch (git checkout -b my-branch)  
 -Commit your changes (git commit -m 'Something done')  
 -Push it into the branch (git push origin my-branch)  
