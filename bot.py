@@ -49,4 +49,4 @@ def stop(m):
 
 
 
-bot.polling()
+bot.polling(none_stop=True, timeout=100)
